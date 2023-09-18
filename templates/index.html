@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <title>Kytos| Home</title>
+</head>
+
+<body>
+    <main class="main">
+        <div class="conainerMapa" style="display: flex;">
+            <div id="barraLateral">
+                <h3 class="title">Kytos-ng</h3>
+                <div class="borda"></div>
+            </div>
+
+
+            <div id="mapa"></div>
+
+        </div>
+
+    </main>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+
+        }
+
+        body {
+            font-family: poppins, sans-serif;
+        }
+
+        .borda {
+            height: 1px;
+            background-color: white;
+            width: 80%;
+            margin-top: 50px;
+            margin: 0 auto;
+        }
+
+        .title {
+            text-align: center;
+            margin-top: 20%;
+            font-size: 25px;
+            font-weight: 500;
+        }
+
+        .containerMapa {
+            display: flex;
+        }
+
+        #barraLateral {
+            height: 100vh;
+            width: 20%;
+            background-color: rgb(18, 18, 18);
+            color: white;
+        }
+
+        #mapa {
+            height: 100vh;
+            width: 80%;
+        }
+
+        #img-mapa {
+            display: none;
+            height: 100vh;
+
+        }
+    </style>
+    <script>
+        var map = L.map('mapa').setView([0, 0], 2);
+
+
+        const camadaBase = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            maxZoom: 20,
+            minZoom: 2,
+            attribution: '© <a href="https://carto.com/attributions">CARTO</a>'
+        }).addTo(map);
+        const urlImagem = 'kytos-logov2.png';
+        const worldBounds = [[-90, 3000], [90, 3000]];
+        const camadaImagem = L.imageOverlay(urlImagem, worldBounds).addTo(map);
+
+        const camadaMapas = {
+            'Plano de Fundo':camadaImagem,
+        };
+        L.control.layers(null,camadaMapas).addTo(map);
+    </script>
+</body>
+
+</html>
